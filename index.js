@@ -7,5 +7,5 @@ const phoneticAlphabet = require('./src/phoneticAlphabet');
 const legacy = require('./src/legacy');
 
 module.exports = {
-  AirportCollector, Collector, Page, phoneticAlphabet, ...legacy,
+  AirportCollector, Collector, Page, phoneticAlphabet, legacy,
 };
