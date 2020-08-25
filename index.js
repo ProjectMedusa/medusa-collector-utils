@@ -4,6 +4,8 @@ const Page = require('./src/Page');
 
 const phoneticAlphabet = require('./src/phoneticAlphabet');
 
+const legacy = require('./src/legacy');
+
 exports = {
-  AirportCollector, Collector, Page, phoneticAlphabet,
+  AirportCollector, Collector, Page, phoneticAlphabet, legacy,
 };
