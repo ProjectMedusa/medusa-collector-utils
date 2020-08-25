@@ -8,6 +8,10 @@ class AirportCollector {
   }
 
   async findCoveredAirports() {
+    return this.cacheOrFind();
+  }
+
+  async cacheOrFind() {
     if (!require('fs').existsSync(`cache/${this.aoi}_airports.json`)) {
       const aerodromes = await page.$('[title=AERODROMES]');
       await aerodromes.click();
@@ -30,14 +34,18 @@ class AirportCollector {
           coveredAerodromes.push(match[1]);
         }
       });
-      await fs.writeFile(
-        `cache/${this.aoi}_airports.json`,
-        JSON.stringify(coveredAerodromes),
-        'utf8',
-      );
+      this.cacheAirports(coveredAerodromes);
       return coveredAerodromes;
     }
     return JSON.parse(await fs.readFile(`cache/${this.aoi}_airports.json`));
+  }
+
+  async cacheAirports(coverage) {
+    await fs.writeFile(
+      `cache/${this.aoi}_airports.json`,
+      JSON.stringify(coverage),
+      'utf8',
+    );
   }
 }
 
