@@ -13,12 +13,12 @@ class AirportCollector {
 
   async cacheOrFind() {
     if (!require('fs').existsSync(`cache/${this.aoi}_airports.json`)) {
-      const aerodromes = await page.$('[title=AERODROMES]');
+      const aerodromes = await page().$('[title=AERODROMES]');
       await aerodromes.click();
       const childrenContainerId = `${await (await aerodromes.getProperty('id')).jsonValue()}details`;
 
       // eslint-disable-next-line no-undef
-      const childrenContainerHTML = await page.evaluate((id) => document.querySelector(`#${id}`).outerHTML, childrenContainerId);
+      const childrenContainerHTML = await page().evaluate((id) => document.querySelector(`#${id}`).outerHTML, childrenContainerId);
 
       const { doc } = new JSDOM(childrenContainerHTML).window;
 
