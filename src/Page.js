@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 let page;
 
 module.exports = {
-  page,
+  getPage: () => page,
   createPage: async (params) => {
     const browser = await puppeteer.launch(params);
     page = await browser.newPage();
