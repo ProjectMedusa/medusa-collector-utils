@@ -36,8 +36,7 @@ For a better understanding of how this package is used, please take a look at th
   * `aerodromeParseFunction`
     * Type: `function`
     * Description: This function is called to parse out an *eAIP* aerodrome line. Examples:
-      * `EYVI/Vilnius ->` *aerodromeParseFunction* `-> EYVI`
-      * `EYVI Vilnius ->` *aerodromeParseFunction* `-> EYVI`
+      * `AD-2.EYPAdetails ->` *aerodromeParseFunction* `-> EYPA`
 * Relevant Methods:
   * `findCoveredAirports`:
     * Async: **true**
