@@ -17,12 +17,12 @@ class AirportCollector {
       await aerodromes.click();
       const childrenContainerId = `${await (await aerodromes.getProperty('id')).jsonValue()}details`;
 
-      // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-use-before-define
       const childrenContainerHTML = await page().evaluate((id) => document.querySelector(`#${id}`).outerHTML, childrenContainerId);
 
-      const { doc } = new JSDOM(childrenContainerHTML).window;
+      const { document } = new JSDOM(childrenContainerHTML).window;
 
-      const children = doc.querySelectorAll('*');
+      const children = document.querySelectorAll('*');
 
       const coveredAerodromes = [];
       const rx = new RegExp(`AD-2.(${this.aoi}[A-Z][A-Z])details`);
