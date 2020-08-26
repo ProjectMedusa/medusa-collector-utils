@@ -3,8 +3,9 @@ const { JSDOM } = require('jsdom');
 const { getPage: page } = require('./Page');
 
 class AirportCollector {
-  constructor(aoi) {
+  constructor(aoi, aerodromeParseFunction) {
     this.aoi = aoi;
+    this.aerodromeParseFunction = aerodromeParseFunction;
   }
 
   async findCoveredAirports() {
@@ -25,13 +26,11 @@ class AirportCollector {
       const children = document.querySelectorAll('*');
 
       const coveredAerodromes = [];
-      const rx = new RegExp(`AD-2.(${this.aoi}[A-Z][A-Z])details`);
 
       children.forEach((child) => {
-        const id = child.getAttribute('id');
-        if (rx.test(id)) {
-          const match = id.match(rx);
-          coveredAerodromes.push(match[1]);
+        const result = this.aerodromeParseFunction(child);
+        if (result) {
+          coveredAerodromes.push(result);
         }
       });
 
