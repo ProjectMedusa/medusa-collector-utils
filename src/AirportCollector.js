@@ -34,6 +34,7 @@ class AirportCollector {
           coveredAerodromes.push(match[1]);
         }
       });
+
       this.cacheAirports(coveredAerodromes);
       return coveredAerodromes;
     }
