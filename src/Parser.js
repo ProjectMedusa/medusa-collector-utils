@@ -2,9 +2,10 @@
 const fs = require('fs').promises;
 
 module.exports = class Parser {
-  constructor(airport, link) {
+  constructor(airport, link, runwayCharacteristicsTable = 0) {
     this.airport = airport;
     this.results = [];
+    this.runwayCharacteristicsTable = runwayCharacteristicsTable;
     this.constructSourceLink(link);
   }
 
@@ -16,6 +17,10 @@ module.exports = class Parser {
     return this.link;
   }
 
+  getRunwayCharasteristicsTable() {
+    return this.runwayCharacteristicsTable;
+  }
+
   async save() {
     await fs.writeFile(
       `results/${this.airport}.json`,
@@ -25,6 +30,10 @@ module.exports = class Parser {
   }
 
   runwayRows() {
+    throw new Error('Method must be overrided!');
+  }
+
+  runwayCharacteristics() {
     throw new Error('Method must be overrided!');
   }
 };

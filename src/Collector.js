@@ -15,10 +15,19 @@ class Collector {
     const { document } = new JSDOM(html).window;
     const titles = document.querySelectorAll('.Title');
     titles.forEach((title) => {
+      const parent = title.parentElement;
       if (title.innerHTML.includes('DECLARED')) {
-        const parent = title.parentElement;
         const rows = parent.querySelectorAll('table > tbody > tr');
         this.parser.runwayRows(rows);
+      }
+    });
+    // run loop again
+    titles.forEach((title) => {
+      const parent = title.parentElement;
+      if (title.innerHTML.includes('PHYSICAL')) {
+        const table = parent.querySelectorAll('table')[this.parser.getRunwayCharasteristicsTable()];
+        const rows = table.querySelectorAll('tbody > tr');
+        this.parser.runwayCharacteristics(rows);
       }
     });
   }
